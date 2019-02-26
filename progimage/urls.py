@@ -22,6 +22,12 @@ from progimage import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('upload/', views.upload_image),
-    path('get/', views.get_image)
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('upload/', views.upload_image, name='upload-image'),
+    path('<int:image_id>/', views.get_image, name='get-image'),
+    # TODO: use image paths instead of unique indentifiers to allow conversion just by changing the extension
+    path('<int:image_id>/convert/<str:ext>/', views.get_converted_image, name='get-converted-image')
+]
+
+# in production images will be served by nginx
+if settings.DEBUG is True:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

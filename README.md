@@ -11,8 +11,10 @@ Microservice which enables image upload and retrieval.
 
 ## Improvements
 
-* django rest framework or django class based views
-* more tests for validation
+* use django rest framework or django class based views or split into 3 views
+* make 404 always json
+* more tests for validation and model methods
+* handle security issues - static files
 
 ## Requirements
 
