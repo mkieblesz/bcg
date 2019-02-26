@@ -12,7 +12,11 @@ Microservice which enables image upload, retrieval and type conversion.
 
 ### Operating in bulk and performance
 
-TODO
+At scale there is going to be few issues. One is disk space, cloud providers have horizontaly scallable services like amazon efs, otherwise custdiom distributet file storage solution will need to be implemented (linux nfs has that ability). Moreover removing unused converted/transformed images periodically.
+
+Quick solution for bulk upload, convert and transform is just forloop through all images in the request instead of getting one and return the list of elements instead of single item. Multithreading in case of I/O operations would increase performance.
+
+The most elegant solution is to have main service making calls to distributed pull of microservices required.
 
 ### Solution stretch - transform
 
@@ -78,7 +82,7 @@ client.get_image('3284u3284')
 * make 404 always json and similar
 * more tests for validation and model methods, more conversion testing
 * seperate convertion functionality to new class from the model
-* ensure unique file uploads
+* ensure unique file uploads and nested folders because there will be problems with too many files in one directory
 
 ## Requirements
 
