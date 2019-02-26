@@ -8,13 +8,15 @@ Microservice which enables image upload and retrieval.
 * python pillow library is used for image manipulation
 * caching transformed images can be implemented by using Image model pointing to original image from which transofrmation was made or writing directly to filesystem with expiration date by using cron
 * use better test runner so it can give better output to assert x == y
+* transformations will work same as type conversions (pil Image class has transformation functions like rotate etc.)
 
 ## Improvements
 
-* use django rest framework or django class based views or split into 3 views
+* use django rest framework or django class based views
 * make 404 always json
-* more tests for validation and model methods
-* handle security issues - static files
+* more tests for validation and model methods, more conversion testing
+* seperate convertion functionality to new class from the model
+* ensure unique file uploads
 
 ## Requirements
 

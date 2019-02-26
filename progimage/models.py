@@ -1,8 +1,14 @@
+import io
+import os
 from django.conf import settings
+from django.core.files.images import ImageFile
 from django.db import models
+from PIL import Image as PILImage
 
 
 class Image(models.Model):
+    ALLOWED_CONVERSIONS = {'png': ['jpg'], 'jpg': ['png']}
+
     image_file = models.ImageField(upload_to='images/')
     converted_from = models.ForeignKey('self', models.CASCADE, null=True, blank=True)
 
@@ -18,17 +24,33 @@ class Image(models.Model):
             'url': self.get_image_url()
         }
 
-    def get_extension_image(self, ext):
-        if ext == self.get_extension():
-            return self
-
+    def get_converted_image(self, ext):
         try:
             return Image.objects.get(image_file__endswith=ext, converted_from=self)
         except Image.DoesNotExist:
             return None
 
-    def create_extension_image(self, ext):
+    def can_convert_to(self, ext):
+        return ext in Image.ALLOWED_CONVERSIONS.get(self.get_extension(), [])
+
+    def convert_image(self, ext):
         '''Creates extension as new image in database'''
 
-        # TODO: convert image
-        return None
+        # pil will convert image automatically after save https://stackoverflow.com/a/10759145
+        im = PILImage.open(self.image_file)
+        im_buffer = io.BytesIO()
+        try:
+            im.save(im_buffer, format=ext)
+            image = Image(converted_from=self)
+
+            # swap extension, keep filename
+            pre, _ = os.path.splitext(os.path.basename(self.image_file.name))
+            converted_filename = '{}.{}'.format(pre, ext)
+
+            image.image_file.save(converted_filename, ImageFile(im_buffer))
+        finally:
+            im_buffer.close()
+
+        image.save()
+
+        return image
