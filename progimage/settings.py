@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'progimage'
 ]
 
 MIDDLEWARE = [
@@ -128,4 +130,5 @@ STATIC_URL = '/static/'
 # Media
 
 MEDIA_ROOT = root('media')
+SITE_URL = env('SITE_URL')
 MEDIA_URL = '/media/'

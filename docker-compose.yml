@@ -35,6 +35,7 @@ services:
     environment:
       - DEBUG=True
       - ALLOWED_HOSTS=progimage.com localhost
+      - SITE_URL=progimage.com
       - POSTGRES_PASSWORD=sdkfj293fkdsfqwf
     ports:
       - '8000:8000'

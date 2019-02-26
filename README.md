@@ -4,7 +4,15 @@ Microservice which enables image upload and retrieval.
 
 ## Solution
 
-* using database for storing images for more reliable image management
+* although not essential database is used for storing id of images for more reliable management
+* python pillow library is used for image manipulation
+* caching transformed images can be implemented by using Image model pointing to original image from which transofrmation was made or writing directly to filesystem with expiration date by using cron
+* use better test runner so it can give better output to assert x == y
+
+## Improvements
+
+* django rest framework or django class based views
+* more tests for validation
 
 ## Requirements
 

@@ -1,6 +1,8 @@
 Django==2.1.7
 psycopg2-binary==2.7.6
 uwsgi==2.0.18
+# https://stackoverflow.com/a/49867787
+pillow==5.0.0
 django-environ==0.4.5
 
 # test
@@ -8,3 +10,4 @@ flake8
 
 # dev
 ipython
+ipdb
