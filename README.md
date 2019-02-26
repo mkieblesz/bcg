@@ -1,6 +1,6 @@
 # Progimage
 
-Microservice which enables image upload and retrieval.
+Microservice which enables image upload, retrieval and type conversion.
 
 ## Solution
 

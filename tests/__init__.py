@@ -36,7 +36,7 @@ class ImageEndpointsTestCase(TestCase):
         assert Image.objects.count() == 2
         assert response.json() == {'id': image.id, 'url': converted_image.get_image_url()}
 
-    # @override_settings(MEDIA_ROOT=tempfile.gettempdir())
+    @override_settings(MEDIA_ROOT=tempfile.gettempdir())
     def test_convert_to_extension(self):
         with open('tests/data/test.jpg', 'rb') as image_file:
             response = self.client.post(reverse('upload-image'), data={'image': image_file})
