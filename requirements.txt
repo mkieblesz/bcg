@@ -1,0 +1,10 @@
+Django==2.1.7
+psycopg2-binary==2.7.6
+uwsgi==2.0.18
+django-environ==0.4.5
+
+# test
+flake8
+
+# dev
+ipython

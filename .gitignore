@@ -1,0 +1,13 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Static
+media/
+
+# Host environment for vscode
+.venv
+
+# Editors
+.vscode
